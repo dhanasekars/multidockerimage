@@ -15,7 +15,7 @@ after_success:
   - docker build -t ds/multi-worker ./worker
 
 # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKERPWD" | docker login -u "$DOCKERID" --password-stdin
 
 # Take the image and push to docker. 
   - docker push ds/multi-client
