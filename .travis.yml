@@ -12,6 +12,13 @@ after_success:
   - docker build -t ds/multi-client ./client
   - docker build -t ds/multi-nginx ./nginx 
   - docker build -t ds/multi-server ./server 
-  - docker build -t ds/multi-worker ./worker 
+  - docker build -t ds/multi-worker ./worker
 
+# Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
+# Take the image and push to docker. 
+  - docker push ds/multi-client
+  - docker push ds/multi-nginx
+  - docker push ds/multi-server
+  - docker push ds/multi-worker
