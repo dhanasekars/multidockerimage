@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t ds/react-test -f ./client/Dockerfile.dev ./client 
+  - docker build -t dhanasekars/react-test -f ./client/Dockerfile.dev ./client 
 
 script:
-  - docker run -e CI=true ds/react-test npm test
+  - docker run -e CI=true dhanasekars/react-test npm test
 
 after_success: 
-  - docker build -t ds/multi-client ./client
-  - docker build -t ds/multi-nginx ./nginx 
-  - docker build -t ds/multi-server ./server 
-  - docker build -t ds/multi-worker ./worker
+  - docker build -t dhanasekars/multi-client ./client
+  - docker build -t dhanasekars/multi-nginx ./nginx 
+  - docker build -t dhanasekars/multi-server ./server 
+  - docker build -t dhanasekars/multi-worker ./worker
 
 # Log in to the docker CLI
-  - docker login -u "$DOCKERID" -p "$DOCKERPWD" docker.io 
+  - echo "$DOCKERPWD" | docker login -u "$DOCKERID" --password-stdin
 
 # Take the image and push to docker. 
-  - docker push ds/multi-client
-  - docker push ds/multi-nginx
-  - docker push ds/multi-server
-  - docker push ds/multi-worker
+  - docker push dhanasekars/multi-client
+  - docker push dhanasekars/multi-nginx
+  - docker push dhanasekars/multi-server
+  - docker push dhanasekars/multi-worker
